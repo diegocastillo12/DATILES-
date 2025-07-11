@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misk'i Dátil - Dulzura Natural de la Tierra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8e2d9 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(139, 69, 19, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #FFD700;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2rem, 4vw, 3rem);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(139, 69, 19, 0.95);
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon, .user-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-icon:hover, .user-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF4500;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(210, 105, 30, 0.7)), url('images/ings.jpeg');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.8;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF6347, #FF4500);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #FF4500, #FF6347);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 30px rgba(255, 99, 71, 0.5);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B4513;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #FF6347, #D2691E);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-radius: 15px;
+            padding: 60px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-text h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8B4513;
+            display: block;
+        }
+
+        /* Products Section */
+        .products {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5DEB3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid #8B4513;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            color: #D2691E;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #FF6347, #D2691E);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FF6347;
+            margin: 1rem 0;
+        }
+
+        .product-rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #FFD700;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn-add-cart {
+            background: linear-gradient(45deg, #FF6347, #FF4500);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-add-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+        }
+
+        .btn-add-cart:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: white;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .review-info h4 {
+            color: #8B4513;
+            margin-bottom: 0.25rem;
+        }
+
+        .review-stars {
+            color: #FFD700;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem 0;
+        }
+
+        .benefit-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(210, 105, 30, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .benefit-item:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .benefit-item h3 {
+            color: #8B4513;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #F5DEB3, #DEB887);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8B4513;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(400px, 100%);
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateX(5px);
+        }
+
+        .cart-item-info {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .cart-item-price {
+            color: #D2691E;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity-btn {
+            background: #8B4513;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #D2691E;
+            transform: scale(1.1);
+        }
+
+        .cart-header {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-content {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .cart-item-price {
+            color: #FF6347;
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .cart-total {
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .payment-methods {
+            margin: 1rem 0;
+        }
+
+        .payment-methods h4 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            background: #f0f0f0;
+        }
+
+        .payment-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .payment-icon {
+            font-size: 1.2rem;
+        }
+
+        .cart-total h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF6347;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: #FF6347;
+            color: #FF6347;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF6347;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .form-group label {
+            color: #8B4513;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #D2691E;
+            box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.2);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+        }
+
+        .contact-form button:hover {
+            background: linear-gradient(45deg, #D2691E, #8B4513);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            margin: 2rem 0;
+        }
+
+        .social-media {
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2C1810;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #FFD700;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll smooth */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #A0522D, #CD853F);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Misk'i Dátil</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Quienes Somos</a></li>
+                <li><a href="#productos">Catálogo</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#opiniones">Opiniones</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="user-icon" onclick="openAuthModal()">
+                    <span style="font-size: 1.2rem;">👤</span>
+                </div>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <span style="font-size: 1.2rem;">🛒</span>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Misk'i Dátil</h1>
+                <p>Dulzura Natural de la Tierra</p>
+                <div class="hero-subtitle">
+                    Tacna – Perú, tierra bendecida por la naturaleza y privilegiada para el cultivo de dátiles orgánicos de la más alta calidad. Cada producto es una expresión auténtica de sabor y bienestar.
+                </div>
+                <a href="#productos" class="btn">Descubre Nuestros Productos</a>
+            </div>
+        </section>
+
+        <section id="nosotros" class="about">
+            <div class="container">
+                <h2 class="section-title">Quienes Somos</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Nuestra Historia</h3>
+                        <p>En Misk'i Dátil - Dulzura Natural de la Tierra somos una empresa tacneña dedicada a la producción de productos orgánicos hechos a base de dátiles. Trabajamos con agricultores locales para ofrecer productos naturales, saludables y de alta calidad que reflejan la riqueza de nuestra tierra. Nuestra pasión es llevar la dulzura auténtica de Tacna a tu mesa, cuidando cada detalle desde la fruta hasta el envase.</p>
+                        
+                        <h3>Misión</h3>
+                        <p>Ofrecer productos orgánicos a base de dátiles de alta calidad, que reflejen la riqueza natural de Tacna, promoviendo un estilo de vida saludable y sostenible, apoyando a los agricultores locales y cuidando cada etapa del proceso, desde la selección hasta el envasado.</p>
+                        
+                        <h3>Visión</h3>
+                        <p>Ser reconocidos como la marca líder en productos gourmet de dátiles orgánicos en Perú, destacando por nuestra calidad, innovación y compromiso con el medio ambiente, llevando la dulzura natural de Tacna a hogares nacionales e internacionales.</p>
+                        <h3>Nuestro Compromiso</h3>
+                        <p>Nuestra pasión es llevar la dulzura auténtica de Tacna a tu mesa, cuidando cada detalle desde la fruta hasta el envase. Desde la cuidadosa selección de los mejores dátiles, pasando por un procesamiento 100% orgánico y natural, hasta un envasado que garantiza frescura y pureza.</p>
+                        
+                        <h3>Línea Gourmet</h3>
+                        <p>Nuestra línea gourmet está diseñada para satisfacer a los paladares más exigentes, ofreciendo una experiencia única que realza y revoluciona el sabor de tus alimentos con la dulzura natural de Tacna.</p>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span>Orgánico</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">0</span>
+                            <span>Químicos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Local</span>
+                            <span>Tacna</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Gourmet</span>
+                            <span>Calidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="productos" class="products">
+            <div class="container">
+                <h2 class="section-title">Catálogo de Productos</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-icon">🍯</div>
+                        <h3>Endulzante Natural</h3>
+                        <p>Endulzante líquido elaborado a base de dátiles seleccionados, sin aditivos ni químicos. Perfecto para diabéticos y personas con dietas especiales.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.8/5) 127 reseñas</span>
+                        </div>
+                        <div class="product-price">S/ 12.00 - S/ 16.00</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart('Endulzante Natural', 14.00)">
+                                Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🥜</div>
+                        <h3>Snack Saludable</h3>
+                        <p>Deliciosos snacks a base de dátiles combinados con ingredientes nutritivos. Ideales para deportistas y personas con estilo de vida activo.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.9/5) 89 reseñas</span>
+                        </div>
+                        <div class="product-price">S/ 10.00 - S/ 12.00</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart('Snack Saludable', 11.00)">
+                                Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🍞</div>
+                        <h3>Pasta Untable</h3>
+                        <p>Cremosa pasta untable elaborada con dátiles, rica en fibra y antioxidantes. Una alternativa saludable al manjar tradicional.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.7/5) 56 reseñas</span>
+                        </div>
+                        <div class="product-price">Próximamente</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" disabled>
+                                Próximamente
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🍓</div>
+                        <h3>Mermeladas Gourmet</h3>
+                        <p>Mermeladas naturales endulzadas únicamente con dátiles, sin azúcar añadida. Sabores únicos y saludables para toda la familia.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.6/5) 34 reseñas</span>
+                        </div>
+                        <div class="product-price">Próximamente</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" disabled>
+                                Próximamente
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🍰</div>
+                        <h3>Torta Tres Leches</h3>
+                        <p>Deliciosa torta tres leches endulzada con nuestro endulzante natural de dátiles. Perfecta para celebraciones especiales.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.9/5) 75 reseñas</span>
+                        </div>
+                        <div class="product-price">S/ 35.00</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart('Torta Tres Leches', 35.00)">
+                                Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon">🍫</div>
+                        <h3>Torta de Chocolate</h3>
+                        <p>Irresistible torta de chocolate premium endulzada naturalmente con dátiles. Sabor intenso y textura perfecta.</p>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">(4.8/5) 62 reseñas</span>
+                        </div>
+                        <div class="product-price">S/ 32.00</div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart('Torta de Chocolate', 32.00)">
+                                Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="opiniones" class="reviews">
+            <div class="container">
+                <h2 class="section-title">Opiniones de Nuestros Clientes</h2>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">MC</div>
+                            <div class="review-info">
+                                <h4>Maria Castillo</h4>
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p>"Los productos son increíblemente naturales y saludables. La mejor alternativa para endulzar que he encontrado."</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">JR</div>
+                            <div class="review-info">
+                                <h4>Juan Ramirez</h4>
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p>"El endulzante natural es perfecto para mi dieta. Excelente sabor y calidad garantizada."</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">LP</div>
+                            <div class="review-info">
+                                <h4>Laura Gonzales</h4>
+                                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p>"Los snacks son perfectos para mis hijos. Saludables y deliciosos, ¡no puedo pedir más!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="beneficios" class="benefits">
+            <div class="container">
+                <h2 class="section-title">Beneficios de Nuestros Productos</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🌿</div>
+                        <h3>100% Natural</h3>
+                        <p>Productos elaborados sin aditivos químicos ni conservantes artificiales</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💪</div>
+                        <h3>Saludable</h3>
+                        <p>Rico en fibra, vitaminas y minerales esenciales para tu bienestar</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🌎</div>
+                        <h3>Sostenible</h3>
+                        <p>Producción responsable que cuida el medio ambiente</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">❤️</div>
+                        <h3>Bienestar</h3>
+                        <p>Ideal para mantener una dieta equilibrada y un estilo de vida saludable</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contáctanos</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>¿Tienes alguna pregunta?</h3>
+                        <p>Estamos aquí para ayudarte. Contáctanos por cualquiera de estos medios:</p>
+                        <div class="contact-details">
+                            <p>📞 Teléfono: +51 952 123 456</p>
+                            <p>📧 Email: miskidatil@gmail.com</p>
+                            <p>📍 Dirección: Av. Principal 123, Tacna - Perú</p>
+                        </div>
+                        <div class="social-media">
+                            <h3>Síguenos en redes sociales</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">Facebook</a>
+                                <a href="#" class="social-link">Instagram</a>
+                                <a href="#" class="social-link">WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Asunto</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mensaje</label>
+                            <textarea required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>Misk'i Dátil</h4>
+                        <p>Dulzura Natural de la Tierra</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Enlaces Rápidos</h4>
+                        <a href="#inicio">Inicio</a><br>
+                        <a href="#nosotros">Quienes Somos</a><br>
+                        <a href="#productos">Catálogo</a><br>
+                        <a href="#beneficios">Beneficios</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <p>📞 +51 952 123 456</p>
+                        <p>📧 miskidatil@gmail.com</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Misk'i Dátil. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-content" id="cart-content"></div>
+        <div class="cart-total">
+            <h3>Total</h3>
+            <div class="total-amount" id="cart-total">S/ 0.00</div>
+            <div class="payment-methods">
+                <h4>Métodos de Pago</h4>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="yape" checked>
+                        <span class="payment-icon">📱</span>
+                        <span>Yape</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="plin">
+                        <span class="payment-icon">📱</span>
+                        <span>Plin</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="card">
+                        <span class="payment-icon">💳</span>
+                        <span>Tarjeta</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="cash">
+                        <span class="payment-icon">💵</span>
+                        <span>Efectivo</span>
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-secondary" onclick="checkout()">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de scroll en el header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            updateCart();
+            toggleCart();
+        }
+
+        function updateCart() {
+            const cartContent = document.getElementById('cart-content');
+            const cartCount = document.getElementById('cart-count');
+            cartContent.innerHTML = '';
+            cartTotal = 0;
+
+            const groupedItems = {};
+            cart.forEach(item => {
+                if (groupedItems[item.name]) {
+                    groupedItems[item.name].quantity++;
+                    groupedItems[item.name].total += item.price;
+                } else {
+                    groupedItems[item.name] = {
+                        price: item.price,
+                        quantity: 1,
+                        total: item.price
+                    };
+                }
+                cartTotal += item.price;
+            });
+
+            Object.entries(groupedItems).forEach(([name, details]) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${name}</div>
+                        <div class="cart-item-price">S/ ${details.price.toFixed(2)} x ${details.quantity}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity('${name}', -1)">-</button>
+                            <span>${details.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${name}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+                cartContent.appendChild(itemDiv);
+            });
+
+            document.getElementById('cart-total').textContent = `S/ ${cartTotal.toFixed(2)}`;
+            cartCount.textContent = cart.length;
+        }
+
+        function updateQuantity(productName, change) {
+            if (change < 0) {
+                const index = cart.findIndex(item => item.name === productName);
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                }
+            } else {
+                const item = cart.find(item => item.name === productName);
+                if (item) {
+                    cart.push({ name: productName, price: item.price });
+                }
+            }
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            const total = cartTotal.toFixed(2);
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            let paymentMethod = '';
+            switch(selectedPayment) {
+                case 'yape':
+                    paymentMethod = 'Yape';
+                    break;
+                case 'plin':
+                    paymentMethod = 'Plin';
+                    break;
+                case 'card':
+                    paymentMethod = 'Tarjeta';
+                    break;
+                case 'cash':
+                    paymentMethod = 'Efectivo';
+                    break;
+            }
+            alert(`¡Pago realizado con éxito mediante ${paymentMethod}!\nTotal pagado: S/ ${total}\nGracias por tu compra.`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.add('active');
+        }
+    </script>
